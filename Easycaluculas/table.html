@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semester Score Calculator</title>
+    <link rel="icon" type="image/x-icon" href="Apps-accessories-calculator-icon.png" />
+    <link rel="stylesheet" href="but.css">
+    <link rel="stylesheet" href="main.css">
+    <style>
+        body{
+            background-color: #131417;
+
+        }
+        h2{
+            text-align: center;
+            color:#f2f2f2;
+            font-size:xx-large;
+        }
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 2px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 50px;
+        }
+
+        #generateBtn,
+        #calculateBtn {
+            margin-top: 10px;
+        }
+
+        .marks {
+            display: flex;
+            flex-direction: column;
+        }
+        .containeri {
+            display: flex; /* Use flexbox to arrange divs in a row */
+            justify-content: space-between; /* Create space between divs */
+        }
+        .sg {
+            width: 50%; /* Set the width of each div */
+            padding: 20px; /* Add some padding for spacing */
+            border: 1px solid #ccc; /* Add a border for visualization */
+            box-sizing: border-box; /* Include padding and border within width */
+            
+        }
+        h4{
+            text-align: center;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-weight: bold;
+            color:whitesmoke;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+        <div class="container">
+            <nav class="navbar navbar-light">
+                <div class="container">
+                    <a class="navbar-brand" href="#">
+                        <img src="Apps-accessories-calculator-icon.png" height="35" alt="MDB Logo" loading="lazy" />
+                    </a>
+                    <a class="navbar-brand" href="#page-top">Easycalculas</a>
+                </div>
+            </nav>
+            <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" id="bt" type="button"
+                data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
+                            href="index.html">Home</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
+                            href="#">About</a></li>
+                          
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <h2> Semester Score Calculator</h2>
+    <br><br><br>
+    <label for="rowCount"><strong>Enter the number of Subjects: </strong></label>
+    <input type="number" id="rowCount" min="1" value="1">
+    <button id="generateBtn">Generate Table</button>
+
+    <div id="tableContainer"></div>
+
+    <button id="calculateBtn">Calculate Totals</button><br><br>
+    <div class="containeri">
+        <div class="sg">
+        <strong>Total Internal Marks:</strong> <span id="totalInternalMarks"></span><br>
+        
+        <strong>Total External Marks:</strong> <span id="totalExternalMarks"></span><br>
+        <strong> Total Marks Obtained: <span id="totalmarks"></span></strong></div>
+        <div class="sg">
+           
+           <div class="s"> <strong>CGPA: <span id="cgpa"></span></strong></div>
+           <div class="s"> <strong>Percentage: <span id="percent"></span></strong></div>
+        </div>
+       
+            
+    </div>
+
+
+    <script>
+        document.getElementById('generateBtn').addEventListener('click', generateTable);
+        document.getElementById('calculateBtn').addEventListener('click', calculateTotals);
+
+        function generateTable() {
+            const rowCount = parseInt(document.getElementById('rowCount').value, 10);
+            const columnCount = 5;
+
+            if (isNaN(rowCount) || rowCount <= 0) {
+                alert('Please enter a valid number of rows.');
+                return;
+            }
+
+            let tableHtml = '<table><thead><tr>';
+            tableHtml += '<th>Subjects</th>';
+            tableHtml += '<th>External Marks</th>';
+            tableHtml += '<th>Internal Marks</th>';
+            tableHtml += '<th>Max External Marks</th>';
+            tableHtml += '<th>Max Internal Marks</th>';
+            tableHtml += '</tr></thead><tbody>';
+
+            for (let i = 1; i <= rowCount; i++) {
+                tableHtml += '<tr>';
+                tableHtml += `<td><input type="text" id="subject${i}" /></td>`;
+                tableHtml += `<td><input type="number" id="externalMarks${i}" /></td>`;
+                tableHtml += `<td><input type="number" id="internalMarks${i}" /></td>`;
+                tableHtml += `<td><input type="number" id="maxExternalMarks${i}" /></td>`;
+                tableHtml += `<td><input type="number" id="maxInternalMarks${i}" /></td>`;
+                tableHtml += '</tr>';
+            }
+
+            tableHtml += '</tbody></table>';
+
+            document.getElementById('tableContainer').innerHTML = tableHtml;
+        }
+
+        function calculateTotals() {
+            const rowCount = parseInt(document.getElementById('rowCount').value, 10);
+            let totalInternalMarks = 0;
+            let totalExternalMarks = 0;
+            let totalMaxInternalMarks = 0;
+            let totalMaxExternalMarks = 0;
+            let marks = 0;
+            let perecnt=0;
+            let sgpa=0;
+            let cgpa=0;
+
+            for (let i = 1; i <= rowCount; i++) {
+                const internalMarks = parseInt(document.getElementById(`internalMarks${i}`).value, 10) || 0;
+                const externalMarks = parseInt(document.getElementById(`externalMarks${i}`).value, 10) || 0;
+                const maxInternalMarks = parseInt(document.getElementById(`maxInternalMarks${i}`).value, 10) || 0;
+                const maxExternalMarks = parseInt(document.getElementById(`maxExternalMarks${i}`).value, 10) || 0;
+
+                totalInternalMarks += internalMarks;
+                totalExternalMarks += externalMarks;
+                totalMaxInternalMarks += maxInternalMarks;
+                totalMaxExternalMarks += maxExternalMarks;
+                marks= (totalInternalMarks+totalExternalMarks); 
+                perecnt= (marks/(totalMaxInternalMarks+totalMaxExternalMarks))*100;
+                let p= parseFloat(perecnt.toFixed(2));
+                cgpa= p/10;
+                c= parseFloat(cgpa.toFixed(2));
+                document.getElementById('totalInternalMarks').textContent = (`${totalInternalMarks}/ ${totalMaxInternalMarks}`);
+                document.getElementById('totalExternalMarks').textContent = (`${totalExternalMarks}/ ${totalMaxExternalMarks}`);
+                document.getElementById('totalmarks').textContent = (`${marks}/ ${(totalMaxInternalMarks+totalMaxExternalMarks)}`);
+                document.getElementById('percent').textContent=p;
+                document.getElementById('cgpa').textContent=c;
+            }
+
+           
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <br><br>
+    <h4>Developed By Aditya Singh</h4>
+</body>
+
+</html>

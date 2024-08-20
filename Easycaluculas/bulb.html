@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulb on off</title>
+    <style>
+        body{
+            background-color: black;
+        }
+      
+button{
+    bottom:5%;
+    margin-left:150px;
+}
+    </style>
+</head>
+<body>
+   <div class="main">
+    <button id="on" onclick="bulbon()">ON</button>
+    <button id="on" onclick="bulboff()">OFF</button>
+    <img src="bulboff.png" id="i" width="300">
+    <img src="bulboff.png" id="r" width="300">
+    
+
+   </div>
+   <script>
+    function bulbon(){
+ let o =document.querySelector('#i');
+    o.src="bulbon.png";
+    o.style.width="25%";
+    let r=document.querySelector('#r')
+    r.src="red.png";
+    }
+   
+    function bulboff(){
+        let o= document.querySelector('#i');
+        o.src="bulboff.png"
+        let r=document.querySelector('#r')
+        r.src="bulboff.png"
+      
+    }
+   
+   </script>
+</body>
+</html>

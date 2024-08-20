@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Calculator</title>
+   <link rel="stylesheet" href="main.css">
+
+   <link rel="icon" type="image/x-icon" href="Apps-accessories-calculator-icon.png" />
+   <!-- Font Awesome icons (free version)-->
+   <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+   <!-- Google fonts-->
+   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+   <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
+       type="text/css" />
+       
+   <!-- Core theme CSS (includes Bootstrap)-->
+   <link href="main.css" rel="stylesheet" />
+
+   <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <style>
+        body{
+            background-color: lightblue;
+        }
+        .heading{
+            text-align: center;
+        }
+        .container{
+            text-align: center;
+        }
+        .rowi .btn{
+            font-size:50px;
+            border-radius: 5px;
+        }
+        .rowi .input{
+            padding-bottom: 40px;
+    margin-top: 10px;
+    padding-left: 70px;
+    border-radius: 10px;
+    justify-content: space-around;
+    font-size: 20px;
+        }
+        input[type=text] {
+            padding: 8px 13px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    text-align: center;
+    padding-right: 31px;
+        }
+          .c { 
+            text-align: center;
+           
+        }
+        .bt{
+            border-radius: 5px;
+            font-size: large;
+        }
+        .ct{
+            border-radius: 5px;
+            font-size: large;
+        }
+        .dt{
+            border-radius: 5px;
+            font-size: large;
+        }
+        a:link, a:visited {
+  color: (internal value);
+  text-decoration: underline;
+  cursor: auto;
+  text-decoration: none;
+}
+
+a:link:active, a:visited:active {
+  color: (internal value);
+}
+.a a{
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+.heade{
+            display: flex;
+            justify-content: center;
+            color:black;
+        }
+    </style>
+</head>
+ <!-- Navigation-->
+ <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+    <div class="container">
+        <nav class="navbar navbar-light">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img src="Apps-accessories-calculator-icon.png" height="35" alt="MDB Logo" loading="lazy" />
+                </a>
+                <a class="navbar-brand" href="#page-top">Easycalculas</a>
+            </div>
+        </nav>
+        <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button"
+            data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive"
+            aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
+                        href="index.html">Home</a></li>
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
+                        href="#">About</a></li>
+                      
+            </ul>
+        </div>
+    </div>
+</nav>
+<body id="bdy">
+    <div class="main">
+    <h1 class="heading"><b>Basic Calculator</b></h1>
+    <br><br>
+    <div class="container">
+    <div class="rowi">
+        <input class="input" type="text"/>
+    </div>
+    <div class="rowi">
+        <button class="btn">C</button>
+        <button class="btn">7</button>
+        <button class="btn">8</button>
+        <button class="btn">9</button>
+        <button class="btn">/</button>
+    </div>
+    <div class="rowi">
+     
+        <button class="btn">4</button>
+        <button class="btn">5</button>
+        <button class="btn">6</button>
+        <button class="btn">-</button>
+        <button class="btn">*</button>
+    </div>
+    <div class="rowi">
+        
+        <button class="btn">1</button>
+        <button class="btn">2</button>
+        <button class="btn">3</button>
+        <button class="btn">+</button>
+    </div>
+    <div class="rowi">
+        <button class="btn">0</button>
+        <button class="btn">=</button>
+    </div>
+    </div>
+    <br>
+    <div class="c">
+        <button class="bt" onclick="bt()">GREEN</button>
+        <button class="ct" onclick="ct()">BROWN</button>
+        <button class="dt" onclick="dt()">PINK</button>
+    </div>
+    <br>
+    <div class="heade">
+        <h3>Other Calculators</h3>
+    </div>
+    <div class="a">
+     <a href="temp.html" target="_blank">Temperature Convertor</a> 
+     <a href="age_cal.html" target="_blank">Age Calculator</a>
+     <a href="table.html" target="_blank">Semester score Calculator</a>
+     <a href="bmi calculator.html" target="_blank">BMI Calculator</a>
+     <a href="length convertor.html" target="_blank">Length Converter</a>
+    </div>
+    <br><br>
+    <script>
+        let string="";
+        let buttons= document.querySelectorAll(".btn");
+        Array.from(buttons).forEach((button)=>{
+            button.addEventListener('click',(e)=>{
+                if(e.target.innerHTML=='C'){
+                    string="";
+                    document.querySelector('.input').value=string;
+                }
+                else if(e.target.innerHTML=='='){
+                    string=eval(string)
+                 document.querySelector('.input').value=string;
+                }
+                else{
+                    console.log(e.target)
+                    string=string+e.target.innerHTML;
+                    document.querySelector('.input').value=string;
+                }
+            })
+        })
+        
+        function bt(){
+       document.querySelector('#bdy').style.background="green";
+       document.querySelector('.bt').style.background="green";
+        }
+
+        function ct(){
+       document.querySelector('#bdy').style.background="brown";
+       document.querySelector('.ct').style.background="brown";
+        }
+       
+        function dt(){
+       document.querySelector('#bdy').style.background= "pink";
+       document.querySelector('.dt').style.background="pink";
+        }
+    </script>
+
+
+
+     <!-- Bootstrap core JS-->
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
